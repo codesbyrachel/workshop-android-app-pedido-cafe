@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -33,6 +35,7 @@ import com.codesbyrachel.cafe.ui.theme.SuccessGreen
 fun CafeScreen() {
     var nomeCliente by remember { mutableStateOf("") }
     var tamanhoSelecionado by remember { mutableStateOf("") }
+    var pedidoConfirmado by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -67,6 +70,7 @@ fun CafeScreen() {
                 value = nomeCliente,
                 onValueChange = {
                     nomeCliente = it
+                    pedidoConfirmado = false
                 },
                 label = { Text("Nome no copo", style = MaterialTheme.typography.labelSmall) },
                 modifier = Modifier.fillMaxWidth(),
@@ -85,6 +89,7 @@ fun CafeScreen() {
                     Button(
                         onClick = {
                             tamanhoSelecionado = tamanho
+                            pedidoConfirmado = false
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (tamanhoSelecionado == tamanho)
@@ -116,7 +121,7 @@ fun CafeScreen() {
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = { },
+                onClick = { pedidoConfirmado = true },
                 enabled = nomeCliente.isNotBlank() && tamanhoSelecionado.isNotEmpty(),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -133,6 +138,22 @@ fun CafeScreen() {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
+
+            if (pedidoConfirmado) {
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Prontinho, $nomeCliente! \nSeu café tamanho $tamanhoSelecionado está sendo preparado.",
+                        modifier = Modifier.padding(16.dp),
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+            }
         }
     }
 }
