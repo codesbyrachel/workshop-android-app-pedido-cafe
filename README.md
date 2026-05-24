@@ -6,6 +6,20 @@ O objetivo é ensinar os fundamentos do Android moderno com Jetpack Compose atra
 
 ---
 
+## 📱 Preview
+
+### Estado inicial
+
+<img src="./screenshots/empty-light.png" width="250"/> <img src="./screenshots/empty-dark.png" width="250"/>
+
+### Pedido preenchido
+
+<img src="./screenshots/light.png" width="250"/> <img src="./screenshots/dark.png" width="250"/>
+
+✅ Compatível com Dark Mode 🌙
+
+---
+
 ## 🌿 Estrutura das Branches
 
 Cada branch representa uma evolução do projeto.
