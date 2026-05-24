@@ -1,2 +1,17 @@
-# workshop-android-app-pedido-cafe
-Workshop prático de Android para iniciantes, criando um app de pedido de café com Kotlin e Jetpack Compose em etapas progressivas.
+# 🧠 Step 3 — State
+
+Nesta etapa introduzimos o conceito de State no Jetpack Compose.
+
+## O que foi adicionado
+
+- Campo de texto funcional
+- Seleção de tamanho
+- Mudança visual dos botões
+- Validação do botão de pedido
+
+## Conceitos
+
+- remember
+- mutableStateOf
+- UI reativa
+- Atualização automática da interface
