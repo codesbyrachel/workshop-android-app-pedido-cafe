@@ -1,2 +1,16 @@
-# workshop-android-app-pedido-cafe
-Workshop prático de Android para iniciantes, criando um app de pedido de café com Kotlin e Jetpack Compose em etapas progressivas.
+# 🚀 Step 4 — Final
+
+Versão final do aplicativo.
+
+## O que foi adicionado
+
+- Confirmação do pedido
+- Card com feedback visual
+- Fluxo completo do app
+
+## Funcionalidades
+
+- Seleção de tamanho
+- Nome personalizado
+- Botão validado
+- Feedback visual ao finalizar pedido
