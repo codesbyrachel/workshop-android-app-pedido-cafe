@@ -16,6 +16,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -27,6 +31,8 @@ import com.codesbyrachel.cafe.ui.theme.SuccessGreen
 
 @Composable
 fun CafeScreen() {
+    var nomeCliente by remember { mutableStateOf("") }
+    var tamanhoSelecionado by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -58,8 +64,10 @@ fun CafeScreen() {
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = nomeCliente,
+                onValueChange = {
+                    nomeCliente = it
+                },
                 label = { Text("Nome no copo", style = MaterialTheme.typography.labelSmall) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
@@ -73,15 +81,43 @@ fun CafeScreen() {
             )
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(onClick = { }) { Text("P", style = MaterialTheme.typography.bodyLarge) }
-                Button(onClick = { }) { Text("M", style = MaterialTheme.typography.bodyLarge) }
-                Button(onClick = { }) { Text("G", style = MaterialTheme.typography.bodyLarge) }
+                listOf("P", "M", "G").forEach { tamanho ->
+                    Button(
+                        onClick = {
+                            tamanhoSelecionado = tamanho
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (tamanhoSelecionado == tamanho)
+                                MaterialTheme.colorScheme.primary
+                            else
+                                MaterialTheme.colorScheme.surfaceVariant,
+
+                            contentColor = if (tamanhoSelecionado == tamanho)
+                                MaterialTheme.colorScheme.onPrimary
+                            else
+                                MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    ) {
+                        Text(tamanho, style = MaterialTheme.typography.bodyLarge)
+                    }
+                }
             }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = if (tamanhoSelecionado.isNotEmpty())
+                    "Tamanho selecionado: $tamanhoSelecionado"
+                else
+                    "Selecione um tamanho",
+                color = if (tamanhoSelecionado.isEmpty()) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
+            )
 
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
                 onClick = { },
+                enabled = nomeCliente.isNotBlank() && tamanhoSelecionado.isNotEmpty(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
